@@ -4302,8 +4302,8 @@ declare namespace sequelize {
         /**
          * Adds a new index to a table
          */
-        addIndex(tableName: string | Object, attributes: string[], options?: DefineIndexOptions,
-            rawTablename?: string): Promise<void>;
+        addIndex(tableName: string, options: DefineIndexesOptions, rawTablename?: string): Promise<void>;
+        addIndex(tableName: string, fields: string[], options?: DefineIndexesOptions, rawTablename?: string): Promise<void>;
 
         /**
          * Shows the index of a table
@@ -4952,42 +4952,11 @@ declare namespace sequelize {
 
     }
 
-    interface DefineIndexOptions {
-        /**
-         * The index type
-         */
-        indicesType?: 'UNIQUE' | 'FULLTEXT' | 'SPATIAL';
-
-        /**
-         * The name of the index. Default is __
-         */
-        indexName?: string;
-
-        /**
-         * For FULLTEXT columns set your parser
-         */
-        parser?: string;
-
-        /**
-         * Set a type for the index, e.g. BTREE. See the documentation of the used dialect
-         */
-        indexType?: string;
-
-        /**
-         * A function that receives the sql query, e.g. console.log
-         */
-        logging?: Function;
-
-        /**
-         * A hash of attributes to limit your index(Filtered Indexes - MSSQL & PostgreSQL only)
-         */
-        where?: AnyWhereOptions;
-    }
-
     /**
-     * Interface for indexes property in DefineOptions
+     * Interface for indexes property in DefineOptions and addIndex method of QueryInterface
      *
      * @see DefineOptions
+     * @see QueryInterface
      */
     interface DefineIndexesOptions {
 
